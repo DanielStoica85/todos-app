@@ -9,4 +9,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
         })
         .catch((err) => console.log(err));
 
+    todoInput.addEventListener('keypress', function (event) {
+        if (event.which === 13) {
+            createTodo();
+        }
+    });
+
 });
+
+function createTodo(todo) {
+
+    const userInput = ui.todoInput.value;
+
+    axios.post('/api/todos', {
+            name: userInput
+        })
+        .then((response) => {
+            ui.todoInput.value = '';
+            let todo = response.data;
+            ui.addTodo(todo);
+        })
+        .catch(err => console.log(err));
+
+}
