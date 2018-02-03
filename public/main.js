@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     });
 
+    // remove element from db and ui
+    ui.list.addEventListener('click', function (event) {
+        ui.removeTodo(event.target);
+    });
+
 });
 
 function createTodo(todo) {
@@ -30,5 +35,4 @@ function createTodo(todo) {
             ui.addTodo(todo);
         })
         .catch(err => console.log(err));
-
 }
