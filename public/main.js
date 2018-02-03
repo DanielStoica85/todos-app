@@ -9,15 +9,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
         })
         .catch((err) => console.log(err));
 
+    // add todo
     todoInput.addEventListener('keypress', function (event) {
         if (event.which === 13) {
             createTodo();
         }
     });
 
-    // remove element from db and ui
+    // remove todo from db and ui
     ui.list.addEventListener('click', function (event) {
-        ui.removeTodo(event.target);
+        if (event.target.tagName === 'SPAN') {
+            event.stopPropagation();
+            ui.removeTodo(event.target);
+        }
+    });
+
+    // update todo completed state
+    ui.list.addEventListener('click', function (event) {
+        if (event.target.tagName === 'LI') {
+            ui.updateTodo(event.target);
+        }
     });
 
 });
@@ -35,4 +46,5 @@ function createTodo(todo) {
             ui.addTodo(todo);
         })
         .catch(err => console.log(err));
+
 }
